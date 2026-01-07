@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        const div = document.createElement("div")
+        div.id = "Parent_div"
+
+        const para = document.createElement("p")
+        para.textContent = "This is content abc... in the paragraph tag, Inside the div. Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam deserunt voluptate, tempore deleniti beatae nam sint quae fugit unde doloremque quo accusantium, ratione sit dicta, culpa dolores iste ipsa autem."
+
+        div.append(para)
+
+
+        document.body.append(div)
+        
+    </script>
+</body>
+</html>

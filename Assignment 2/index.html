@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <script>
+
+        const color_picker = document.createElement("input")
+        const body = document.body
+        body.style.height = "90vh"
+
+        color_picker.setAttribute("type", "color")
+        color_picker.setAttribute("value", "#ffffff")
+        color_picker.style.height = "50px"
+        color_picker.style.width = "150px"
+        color_picker.style.border = "6px solid gray"
+
+        body.style.display = "flex"
+        body.style.flexDirection = "column"
+        body.style.justifyContent = "center"
+        body.style.alignItems = "center"
+
+        color_picker.addEventListener('input',(event)=>{
+            let  value = event.target.value
+            document.body.style.backgroundColor = value
+        });
+
+        document.body.append(color_picker)
+        
+    </script>
+
+</body>
+</html>
