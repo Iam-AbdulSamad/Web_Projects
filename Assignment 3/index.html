@@ -3,50 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    <div class="calculator">
-        <div class="display">
 
+<body class="min-h-screen flex items-center justify-center bg-gray-100">
+
+    <!-- Calculator Card -->
+    <div class="bg-white w-80 p-6 rounded-2xl shadow-lg">
+
+        <!-- Display -->
+        <div class="bg-gray-100 rounded-lg px-4 py-4 mb-4 text-right">
+            <h1 id="display" class="text-3xl font-semibold text-gray-800 min-h-[40px]"></h1>
         </div>
-        <div class="buttons">
-            <div class="starting_row">
-                <button id="Clr_btn">Clear</button>
-                <button>/</button>
-                <button>*</button>
-            </div>
-            <div class="Second_row">
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>-</button>
-            </div>
-            <div class="middle">
-                <div class="horizontal_rows">
-                    <div class="third_row">
-                        <button>4</button>
-                        <button>5</button>
-                        <button>6</button>
-                    </div>
-                    <div class="fourth_row">
-                        <button>3</button>
-                        <button>2</button>
-                        <button>1</button>
-                    </div>
-                </div>
-                <div class="side_btn">
-                    <button id="plus_btn">+</button>
-                </div>
-            </div>
-            <div class="last_row">
-                <button>0</button>
-                <button>00</button>
-                <button>.</button>
-                <button>=</button>
-            </div>
+
+        <!-- Buttons -->
+        <div class="grid grid-cols-4 gap-3">
+
+            <!-- Row 1 -->
+            <button value="c"
+                class="btn bg-gray-200 hover:bg-gray-300 active:scale-95 rounded-lg h-12 font-medium transition">
+                C
+            </button>
+
+            <button value="/"
+                class="btn bg-gray-200 hover:bg-gray-300 active:scale-95 rounded-lg h-12 font-medium transition">
+                /
+            </button>
+
+            <button value="*"
+                class="btn bg-gray-200 hover:bg-gray-300 active:scale-95 rounded-lg h-12 font-medium transition">
+                *
+            </button>
+
+            <button value="-"
+                class="btn bg-gray-200 hover:bg-gray-300 active:scale-95 rounded-lg h-12 font-medium transition">
+                -
+            </button>
+
+            <!-- Numbers -->
+            <button value="7"
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 transition">
+                7
+            </button>
+
+            <button value="8"
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 transition">
+                8
+            </button>
+
+            <button value="9"
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 transition">
+                9
+            </button>
+
+            <button value="+"
+                class="btn bg-gray-300 hover:bg-gray-400 active:scale-95 rounded-lg h-12 row-span-2 font-medium transition">
+                +
+            </button>
+
+            <button value="4"
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 transition">
+                4
+            </button>
+
+            <button value="5"
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 transition">
+                5
+            </button>
+
+            <button value="6"
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 transition">
+                6
+            </button>
+
+            <button value="1"
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 transition">
+                1
+            </button>
+
+            <button value="2"
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 transition">
+                2
+            </button>
+
+            <button value="3"
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 transition">
+                3
+            </button>
+
+            <button value="="
+                class="btn bg-gray-800 text-white hover:bg-gray-700 active:scale-95 rounded-lg h-12 row-span-2 font-medium transition">
+                =
+            </button>
+
+            <button value="0"
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 col-span-2 transition">
+                0
+            </button>
+
+            <button value="."
+                class="btn bg-gray-50 hover:bg-gray-200 active:scale-95 rounded-lg h-12 transition">
+                .
+            </button>
+
+            <button value="clear"
+                class="btn bg-gray-300 hover:bg-gray-400 active:scale-95 rounded-lg h-12 col-span-4 font-medium transition">
+                Clear
+            </button>
         </div>
     </div>
+
+    <!-- JS Logic -->
+    <script>
+        const display = document.getElementById('display');
+        const buttons = document.querySelectorAll('.btn');
+        let input = "";
+
+        buttons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const value = event.target.value;
+
+                if (value === "=") {
+                    if (input.trim() !== "") {
+                        try {
+                            input = eval(input).toString();
+                            display.textContent = input;
+                        } catch {
+                            display.textContent = "Error";
+                            input = "";
+                        }
+                    }
+                }
+                else if (value === "clear") {
+                    input = "";
+                    display.textContent = "";
+                }
+                else if (value === "c") {
+                    input = input.slice(0, -1);
+                    display.textContent = input;
+                }
+                else {
+                    input += value;
+                    display.textContent = input;
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
