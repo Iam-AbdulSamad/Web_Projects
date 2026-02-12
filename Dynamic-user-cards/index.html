@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-[#96a899] text-white text-lg min-h-screen pt-2">
+    <div class="form flex flex-col items-center ">
+        <form action="" class="flex flex-col w-1/4 p-4 items-center">
+            <input required class="m-2 border-2 p-2 rounded-lg" type="text" placeholder="Enter your name" name="" id="">
+            <input required class="m-2 border-2 p-2 rounded-lg" type="number" placeholder="Enter your ID" name="" id="">
+            <input required class="m-2 border-2 p-2 rounded-lg" type="number" placeholder="Enter your Age" name="" id="">
+            <input required class="m-2 border-2 p-2 rounded-lg" type="email" placeholder="Enter your Email" name="" id="">
+            <button type="submit" class="w-[40%] m-2 border-2 p-2 rounded-lg bg-[#5b7860] hover:bg-[#7ba882] hover:shadow-xl hover:shadow-[#7ba882]/80">Submit</button>
+        </form>
+    </div>
+    <div id="data" class="h-30 min-w-full grid grid-cols-5 gap-4"></div>
+    <script>
+        let data_Box = document.querySelector('#data');
+        let form_Element = document.querySelector('form')
+        let inputs = document.querySelectorAll('input')
+        let user = {
+            name: "",
+            id: "",
+            age: "",
+            email: "",
+        }
+        form_Element.addEventListener("submit", (event) => {
+            event.preventDefault();
+            let card = document.createElement('div')
+            card.classList = "h-full w-full bg-sky-500 rounded-xl ml-2 p-4"
+            user.name = inputs[0].value
+            user.id = inputs[1].value
+            user.age = inputs[2].value
+            user.email = inputs[3].value
+            card.innerHTML = `
+            <p class="text-lg">Name: ${user.name}</p>
+            <p class="text-lg">ID: ${user.id}</p>
+            <p class="text-lg">Age: ${user.age}</p>
+            <p class="text-lg">Email: ${user.email}</p>
+            `
+            data_Box.append(card)
+            inputs.forEach(element => {
+                element.value = "";
+            });
+        })
+    </script>
+</body>
+</html>
