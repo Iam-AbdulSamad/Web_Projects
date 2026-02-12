@@ -10,15 +10,20 @@
 
 <body class="bg-[#121010] p-10 text-white">
     <input type="text" placeholder="Type Anything" class="h-13 p-3 text-2xl border-sky-300 border-1" maxlength="100">
-    <h1 class="mt-10 text-4xl italic">Characters left : <span id="count" class="text-bold text-green-500 ">20</span></h1>
+    <h1 class="mt-10 text-4xl italic">Characters left : <span id="count" class="text-bold text-green-500 ">30</span></h1>
     <script>
         let count_Element = document.querySelector('#count')
         let inp = document.querySelector('input')
 
         inp.addEventListener('input', (event) => {
-            let count = event.target.value.length;
-            
-            count.textContent = event.target.value.length
+            let count = 30 - event.target.value.length;
+            count_Element.textContent = count
+            if(count < 0){
+                count_Element.classList.replace("text-green-500", "text-red-500")
+                return
+            }else{
+                count_Element.classList.replace("text-red-500", "text-green-500")
+            }
         })
     </script>
 </body>
