@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-[#121010] p-10 text-white">
+    <input type="text" placeholder="Type Anything" class="h-13 p-3 text-2xl border-sky-300 border-1" maxlength="100">
+    <h1 class="mt-10 text-4xl italic">Characters left : <span id="count" class="text-bold text-green-500 ">20</span></h1>
+    <script>
+        let count_Element = document.querySelector('#count')
+        let inp = document.querySelector('input')
+
+        inp.addEventListener('input', (event) => {
+            let count = event.target.value.length;
+            
+            count.textContent = event.target.value.length
+        })
+    </script>
+</body>
+
+</html>

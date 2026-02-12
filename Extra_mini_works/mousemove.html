@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-[#121010] p-10 relative overflow-hidden">
+    <div id="circle" class="bg-red-400 w-10 h-10 rounded-[50%] absolute"></div>
+    <script>
+        let circle_Element = document.getElementById("circle");
+        window.addEventListener("mousemove", (event) => {
+            let positionX = event.clientX + "px"
+            let positionY = event.clientY + "px"
+            circle_Element.style.left = positionX
+            circle_Element.style.top = positionY
+        })
+    </script>
+</body>
+
+</html>
