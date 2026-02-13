@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Form Validator</title>
+</head>
+
+<body
+    class="bg-[url(https://livewire.laravel.com/images/bg_paywall.png)] bg-cover min-h-screen flex justify-center items-center">
+    <div class="form-container bg-[#1c1c1c] w-1/4 p-5">
+        <form action="" class="text-white flex flex-col gap-2">
+            <div class="email flex flex-col gap-4">
+                <label for="email">Email:</label>
+                <input type="text" id="email" class="border-1 border-sky-300 p-2 rounded-md"
+                    placeholder="Enter you Password">
+                <p class="error" id="emailError"></p>
+            </div>
+            <div class="password flex flex-col gap-4">
+                <label for="password">Password:</label>
+                <input type="password" id="password" class="border-1 border-sky-300 p-2 rounded-md"
+                    placeholder="Enter your Password">
+                <p class="error" id="passwordError"></p>
+            </div>
+            <button type="submit"
+                class=" text-[#555555] p-2 rounded-md bg-sky-300 hover:bg-sky-400 border-none">Validate</button>
+        </form>
+    </div>
+    <script>
+        const email = document.querySelector('#email')
+        const password = document.querySelector('#password')
+        const form = document.querySelector('form')
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
+            if (email_regex.test(email.value)) {
+                document.querySelector('#emailError').textContent = ""
+            }
+            else {
+                document.querySelector('#emailError').textContent = "Invalid Email Format"
+                document.querySelector('#emailError').classList.add('text-red-500')
+            }
+
+            if (password_regex.test(password.value)) {
+                document.querySelector('#passwordError').textContent = ""
+            }
+            else {
+                document.querySelector('#passwordError').textContent = "Invalid Password Format"
+                document.querySelector('#passwordError').classList.add('text-red-500')
+            }
+        })
+    </script>
+</body>
+</html>
