@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body
+    class="bg-[url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHN1T8k5egBetu1sxmAKJRTefDMmBYvPh7tQ&s)] text-white flex justify-center items-center min-h-screen">
+    <div class="loading_container h-40 w-[20%] rounded-xl bg-[#1f1f1f] flex flex-col items-center justify-evenly">
+        <p class="text-xl italic" id="downloading_status">Downloading...</p>
+        <div id="loadingbar" class="w-3/4 h-3 bg-[#2e2e2e] rounded-xl">
+            <div id="progress" class="w-[0%] h-full bg-[#f7f7f7] rounded-xl"></div>
+        </div>
+        <p id="loading_count" class="text-xl text-bold">0%</p>
+    </div>
+    <script>
+        const progress_Element = document.querySelector('#progress');
+        const loading_count_Element = document.querySelector('#loading_count');
+        const downloading_status_Element = document.querySelector('#downloading_status');
+
+        let count = 0;
+        let loadbar = setInterval(() => {
+            count = count + 1
+            if (count <= 100) {
+                loading_count_Element.textContent = ""
+                progress_Element.style.width = `${count}%`
+                loading_count_Element.textContent = count + "%"
+            }
+            else {
+                downloading_status_Element.textContent = ""
+                downloading_status_Element.textContent = "Downloaded successfull"
+                downloading_status_Element.classList.add("text-green-500")
+                clearInterval(loadbar)
+            }
+        }, 30)
+    </script>
+</body>
+
+</html>
