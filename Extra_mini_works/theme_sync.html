@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .dark {
+            background-color: #121010;
+            color: white;
+        }
+
+        .light {
+            background-color: #f7f7f7;
+            color: black;
+        }
+    </style>
+</head>
+
+<body id="content" class="flex justify-center items-center min-h-screen">
+    <div class="h-40 w-[20%] rounded-xl flex flex-col items-center justify-evenly">
+        <p class="text-2xl text-bold">Theme Prefrence</p>
+        <button id="toggle" class="bg-[#5e5d5d] p-3 rounded-lg border-none">Toggle Theme</button>
+    </div>
+    <script>
+        const toggle_Element = document.querySelector('#toggle')
+        const content_Element = document.querySelector('#content')
+        let theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+        function theme_change(theme) {
+            if (!theme) {
+                content_Element.classList.remove('dark');
+                content_Element.classList.add('light')
+                localStorage.setItem("theme", "light");
+            } else {
+                content_Element.classList.remove('light');
+                content_Element.classList.add('dark');
+                localStorage.setItem("theme", "dark");
+            }
+        }
+
+        localStorage.getItem("theme") === "light" ? theme_change(false) : theme_change(true)
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener("change", (event) => {
+            theme = event.matches
+            console.log(theme);
+            theme_change(theme);
+        })
+
+        toggle_Element.addEventListener("click", () => {
+            if (localStorage.getItem("theme") == "light") {
+                theme = true
+                theme_change(theme)
+            } else {
+                theme = false
+                theme_change(theme)
+            }
+        })
+    </script>
+</body>
+
+</html>
