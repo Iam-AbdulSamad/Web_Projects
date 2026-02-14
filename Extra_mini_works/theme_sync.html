@@ -44,9 +44,11 @@
         localStorage.getItem("theme") === "light" ? theme_change(false) : theme_change(true)
 
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener("change", (event) => {
-            theme = event.matches
-            console.log(theme);
-            theme_change(theme);
+            if (!localStorage.getItem("theme")) {
+                theme = event.matches
+                console.log(theme);
+                theme_change(theme);
+            }
         })
 
         toggle_Element.addEventListener("click", () => {
