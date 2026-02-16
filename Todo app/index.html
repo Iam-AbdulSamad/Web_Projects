@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <link href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons@3.3.1/css/all/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body
+    class="bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 min-h-screen text-white flex flex-col items-center w-full gap-5">
+    <div id="header" class="flex flex-col mt-40 items-center gap-14 h-full w-full">
+        <p class="text-8xl">Just do it.</p>
+        <div class="w-[35%] flex flex-col items-center gap-4">
+            <div class="w-full flex items-center gap-1">
+                <input class="w-full border-none bg-slate-500 rounded-lg p-2 h-full" type="text" name="" id=""
+                    placeholder="Add a task...">
+                <i id="add" class="fi fi-br-plus ml--20 bg-indigoJust do it.
+                
+                Add a task...
+                7:12pm Saturday, 14 February 2026
+                
+                -800 hover:bg-indigo-400 p-2 rounded-lg h-full "></i>
+            </div>
+            <p>7:12pm Saturday, 14 February 2026</p>
+        </div>
+    </div>
+    <div id="todo_cards" class="w-3/4 h-100 flex flex-col items-center gap-4">
+
+    </div>
+    <script>
+
+        const input_Element = document.querySelector('input');
+        const add_Element = document.querySelector('#add');
+        let count;
+
+        !localStorage.getItem("list") ? count = 0 : count = JSON.stringify(localStorage.getItem("list")).length;
+
+
+        add_Element.addEventListener("click", () => {
+            const content = input_Element.value
+            if (!localStorage.getItem("list")) {
+                let count = 0
+                create_card(content, count)
+
+            }
+            //     if(content != ""){
+            //         let todo_card = document.createElement('div');
+            //         let todo_cards_Element = document.querySelector('#todo_cards');
+            //         todo_card.className = "w-1/2 bg-sky-500 h-15 p-2 rounded-xl flex items-center p-5"
+            //         todo_card.innerHTML = `
+            //         <p id= "content" class="w-[50%]">${content}</p>
+            //         <div class="flex gap-4 w-[50%] justify-end">
+            //             <i id="done" class="fi fi-ss-badge-check bg-indigo-500 p-2 rounded-[40%]"></i>
+            //             <i id="delete" class="fi fi-ss-trash-check bg-indigo-500 p-2 rounded-[40%]"></i>
+            //             </div>`
+            //             todo_cards_Element.append(todo_card)
+            //         }
+            //     const done_Element = document.querySelector('#done')
+        })
+
+        // done_Element.addEventListener('click',()=>{
+        // const content_element = document.querySelector('#content');
+        //     content_element.classList.toggle("line-through")
+        // })
+
+
+
+        function create_card(content, id) {
+            let todo_card = document.createElement('div');
+            let todo_cards_Element = document.querySelector('#todo_cards');
+            todo_card.className = "w-1/2 bg-sky-500 h-15 p-2 rounded-xl flex items-center p-5"
+            todo_card.innerHTML = `
+            <p id= "content" class="w-[50%]">${content}</p>
+            <div class="flex gap-4 w-[50%] justify-end">
+            <i id="done-${id}" class="fi fi-ss-badge-check bg-indigo-500 p-2 rounded-[40%]"></i>
+            <i id="delete-${id}" class="fi fi-ss-trash-check bg-indigo-500 p-2 rounded-[40%]"></i>
+            </div>`
+            todo_cards_Element.append(todo_card)
+            return count++;
+        }
+    </script>
+
+</body>
+
+</html>
