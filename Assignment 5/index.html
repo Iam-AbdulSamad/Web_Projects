@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-[#161c18] w-full min-h-screen flex items-center">
+    <div id="signals" class="h-80 w-full flex justify-evenly items-center ">
+        <div id="signal-1" class="bg-[#242e27] w-[10%] h-full flex flex-col gap-5 p-5 rounded-2xl">
+            <div id="red-1" class="bg-red-500 w-[1/2] h-full rounded-[50%] shadow-xl shadow-red-400/50"></div>
+            <div id="yellow-1" class="bg-yellow-300 w-[1/2] h-full rounded-[50%] shadow-xl shadow-yellow-200/50"></div>
+            <div id="green-1" class="bg-green-600 w-[1/2] h-full rounded-[50%] shadow-xl shadow-green-500/50"></div>
+        </div>
+        <div id="signal-2" class="bg-[#242e27] w-[10%] h-full flex flex-col gap-5 p-5 rounded-2xl">
+            <div id="red-2" class="bg-red-500 w-[1/2] h-full rounded-[50%] shadow-xl shadow-red-400/50"></div>
+            <div id="yellow-2" class="bg-yellow-300 w-[1/2] h-full rounded-[50%] shadow-xl shadow-yellow-200/50"></div>
+            <div id="green-2" class="bg-green-600 w-[1/2] h-full rounded-[50%] shadow-xl shadow-green-500/50"></div>
+        </div>
+        <div id="signal-3" class="bg-[#242e27] w-[10%] h-full flex flex-col gap-5 p-5 rounded-2xl ">
+            <div id="red-3" class="bg-red-500 w-[1/2] h-full rounded-[50%] shadow-xl shadow-red-400/50"></div>
+            <div id="yellow-3" class="bg-yellow-300 w-[1/2] h-full rounded-[50%] shadow-xl shadow-yellow-200/50"></div>
+            <div id="green-3" class="bg-green-600 w-[1/2] h-full rounded-[50%] shadow-xl shadow-green-500/50"></div>
+        </div>
+        <div id="signal-4" class="bg-[#242e27] w-[10%] h-full flex flex-col gap-5 p-5 rounded-2xl">
+            <div id="red-4" class="bg-[#555555] w-[1/2] h-full rounded-[50%] "></div>
+            <div id="yellow-4" class="bg-[#555555] w-[1/2] h-full rounded-[50%] "></div>
+            <div id="green-4" class="bg-[#555555] w-[1/2] h-full rounded-[50%] "></div>
+        </div>
+    </div>
+    <script>
+        let signal = 0
+        // while () {
+        if (signal == 0) {
+
+        }
+        // }
+
+        function change_signal(signal_number) {
+            const signal = document.querySelector('signal-' + signal_number);
+            const red_signal = document.querySelector('#red-' + signal_number);
+            const yellow_signal = document.querySelector('#yellow-' + signal_number);
+            const green_signal = document.querySelector('#green-' + signal_number);
+
+            green_signal.classList.add("shadow-xl shadow-red-400/50")
+            green_signal.classList.replace("bg-red-500", "bg-red-500")
+
+            green_signal.classList.add("shadow-xl shadow-yellow-200/50")
+            green_signal.classList.replace("bg-[#555555]", "bg-yellow-300")
+
+            green_signal.classList.add("shadow-xl shadow-green-500/50")
+            green_signal.classList.replace("bg-[#555555]", "bg-green-600")
+
+            setTimeout(() => {
+
+            }, timeout);
+
+
+        }
+    </script>
+</body>
+
+</html>
