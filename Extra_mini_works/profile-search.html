@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <link href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons@3.3.1/css/all/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body class="bg-gray-200 flex flex-col pt-10 items-center min-h-screen gap-8">
+    <div class="h-full flex">
+        <input type="text" placeholder="Search the User.."
+            class="border-2 border-red-400 p-2 text-lg focus:outline-none">
+        <button class="h-full bg-red-400 p-3 rounded-r-lg focus:outline-none"><i class="fi fi-br-search"></i></button>
+    </div>
+    <div class="card grid grid-cols-7 gap-4 p-6" id="cards_container">
+
+        <!-- <p class="col-span-9 text-center">No Users here...</p>  -->
+    </div>
+    <script>
+        const users = [
+            { ID: 1, Name: "Aarav", Age: 24, Email: "aarav@gmail.com", IsActive: true },
+            { ID: 2, Name: "Sanya", Age: 29, Email: "sanya@yahoo.com", IsActive: false },
+            { ID: 3, Name: "Vikram", Age: 32, Email: "vikram@outlook.com", IsActive: true },
+            { ID: 4, Name: "Ananya", Age: 21, Email: "ananya@gmail.com", IsActive: true },
+            { ID: 5, Name: "Rohan", Age: 27, Email: "rohan@gmail.com", IsActive: false },
+            { ID: 6, Name: "Priya", Age: 35, Email: "priya@icloud.com", IsActive: true },
+            { ID: 7, Name: "Karan", Age: 23, Email: "karan@gmail.com", IsActive: false },
+            { ID: 8, Name: "Meera", Age: 31, Email: "meera@yahoo.com", IsActive: true },
+            { ID: 9, Name: "Ishaan", Age: 26, Email: "ishaan@gmail.com", IsActive: true },
+            { ID: 10, Name: "Sneha", Age: 22, Email: "sneha@outlook.com", IsActive: false },
+            { ID: 11, Name: "Aditya", Age: 30, Email: "aditya@gmail.com", IsActive: true },
+            { ID: 12, Name: "Diya", Age: 25, Email: "diya@gmail.com", IsActive: false },
+            { ID: 13, Name: "Kabir", Age: 28, Email: "kabir@yahoo.com", IsActive: true },
+            { ID: 14, Name: "Riya", Age: 33, Email: "riya@gmail.com", IsActive: true },
+            { ID: 15, Name: "Arjun", Age: 34, Email: "arjun@outlook.com", IsActive: false },
+            { ID: 16, Name: "Tara", Age: 20, Email: "tara@gmail.com", IsActive: true },
+            { ID: 17, Name: "Dev", Age: 29, Email: "dev@gmail.com", IsActive: false },
+            { ID: 18, Name: "Kiara", Age: 24, Email: "kiara@yahoo.com", IsActive: true },
+            { ID: 19, Name: "Yash", Age: 31, Email: "yash@gmail.com", IsActive: true },
+            { ID: 20, Name: "Nisha", Age: 26, Email: "nisha@icloud.com", IsActive: false },
+            { ID: 21, Name: "Sahil", Age: 27, Email: "sahil@gmail.com", IsActive: true },
+            { ID: 22, Name: "Avni", Age: 23, Email: "avni@gmail.com", IsActive: true },
+            { ID: 23, Name: "Manav", Age: 32, Email: "manav@outlook.com", IsActive: false },
+            { ID: 24, Name: "Kavya", Age: 25, Email: "kavya@yahoo.com", IsActive: true },
+            { ID: 25, Name: "Aryan", Age: 28, Email: "aryan@gmail.com", IsActive: true },
+            { ID: 26, Name: "Esha", Age: 22, Email: "esha@gmail.com", IsActive: false },
+            { ID: 27, Name: "Nakul", Age: 30, Email: "nakul@gmail.com", IsActive: true },
+            { ID: 28, Name: "Myra", Age: 24, Email: "myra@yahoo.com", IsActive: true },
+            { ID: 29, Name: "Reyansh", Age: 35, Email: "reyansh@gmail.com", IsActive: false },
+            { ID: 30, Name: "Siya", Age: 21, Email: "siya@outlook.com", IsActive: true },
+            { ID: 31, Name: "Vivaan", Age: 29, Email: "vivaan@gmail.com", IsActive: true },
+            { ID: 32, Name: "Prisha", Age: 26, Email: "prisha@icloud.com", IsActive: false },
+            { ID: 33, Name: "Varun", Age: 33, Email: "varun@gmail.com", IsActive: true },
+            { ID: 34, Name: "Zoya", Age: 23, Email: "zoya@yahoo.com", IsActive: true },
+            { ID: 35, Name: "Ojas", Age: 27, Email: "ojas@gmail.com", IsActive: false },
+            { ID: 36, Name: "Ira", Age: 25, Email: "ira@gmail.com", IsActive: true },
+            { ID: 37, Name: "Advait", Age: 31, Email: "advait@outlook.com", IsActive: true },
+            { ID: 38, Name: "Aanya", Age: 20, Email: "aanya@gmail.com", IsActive: false },
+            { ID: 39, Name: "Ranveer", Age: 34, Email: "ranveer@yahoo.com", IsActive: true },
+            { ID: 40, Name: "Shanaya", Age: 28, Email: "shanaya@gmail.com", IsActive: true },
+            { ID: 41, Name: "Ayaan", Age: 22, Email: "ayaan@icloud.com", IsActive: false },
+            { ID: 42, Name: "Tanvi", Age: 29, Email: "tanvi@gmail.com", IsActive: true },
+            { ID: 43, Name: "Kabir", Age: 30, Email: "kabir.s@outlook.com", IsActive: true },
+            { ID: 44, Name: "Sara", Age: 24, Email: "sara@gmail.com", IsActive: false },
+            { ID: 45, Name: "Veer", Age: 26, Email: "veer@yahoo.com", IsActive: true },
+            { ID: 46, Name: "Kyra", Age: 27, Email: "kyra@gmail.com", IsActive: true },
+            { ID: 47, Name: "Tushar", Age: 32, Email: "tushar@gmail.com", IsActive: false },
+            { ID: 48, Name: "Navya", Age: 23, Email: "navya@outlook.com", IsActive: true },
+            { ID: 49, Name: "Ritvik", Age: 31, Email: "ritvik@gmail.com", IsActive: true },
+            { ID: 50, Name: "Gia", Age: 25, Email: "gia@yahoo.com", IsActive: false }
+        ];
+        const cards_container_Element = document.querySelector("#cards_container")
+        const input_Element = document.querySelector("input")
+        let arr = [...users]
+
+        function render_cards(arr){
+            arr.map((Element) => {
+                const card = document.createElement("div")
+                card.classList = "bg-[url(https://t4.ftcdn.net/jpg/03/92/25/09/360_F_392250914_2Od8jNRBPgpMu8W29vCh4hiu5EUXbgGU.jpg)] bg-cover text-white rounded-lg flex flex-col p-4 justify-center h-35 shadow-2xl shadow-gray-400"
+                card.innerHTML =  `
+                <div class="flex items-center justify-between"> 
+                    <p>${Element.ID}</p> 
+                    <div class="${Element.IsActive == true ? "bg-green-500" : "bg-red-500"} w-5 h-5 rounded-[50%]"></div>
+                </div>
+                <p>${Element.Name}</p>
+                <p>${Element.Age}</p>
+                <p>${Element.Email}</p>
+                `
+                cards_container_Element.appendChild(card)
+            })
+        }
+
+        render_cards(users)
+
+        input_Element.addEventListener("input", (event)=>{
+            search = (event.target.value)
+            search.length === 0 ? search = "" : search = search.charAt(0).toUpperCase() + search.slice(1);
+            cards_container_Element.innerHTML = ''
+            arr = users.filter((element)=>{
+                if (element.Name.startsWith(search)){
+                    return element;
+                }
+            })
+            render_cards(arr)
+        })
+        
+    </script>
+</body>
+</html>
