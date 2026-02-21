@@ -27,67 +27,58 @@
 
     </div>
     <script>
-
         const input_Element = document.querySelector('input');
         const add_Element = document.querySelector('#add');
-        let todo_cards_Element = document.querySelector('#todo_cards');
-        let count;
-        let list = [];
+        const todo_cards_Element = document.querySelector('#todo_cards');
 
-        function create_card(content, id) {
-            let todo_card = document.createElement('div');
-            todo_card.className = "w-1/2 bg-sky-500 h-15 p-2 rounded-xl flex items-center p-5"
-            todo_card.setAttribute("id", id + 1)
-            todo_card.innerHTML = `
-            <p id= "card-${id + 1}" class="w-[50%]">${content}</p>
-            <div class="flex gap-4 w-[50%] justify-end">
-                <i id="done-${id + 1}" class="fi fi-ss-badge-check bg-indigo-500 p-2 rounded-[40%]"></i>
-            <i id="delete-${id + 1}" class="fi fi-ss-trash-check bg-indigo-500 p-2 rounded-[40%]"></i>
-            </div>`
-            todo_cards_Element.append(todo_card)
-            input_Element.value = "";
-            return id + 1;
-        }
 
-        function add_card() {
-            const content = input_Element.value
-            count = create_card(content, count)
-            console.log(count);
-            list.push(content);
+        let list = JSON.parse(localStorage.getItem("list")) || [];
+
+        function render_list() {
+            todo_cards_Element.innerHTML = ""; 
+            list.forEach((content, index) => {
+                let todo_card = document.createElement('div');
+                todo_card.className = "w-1/2 bg-sky-500 h-15 p-2 rounded-xl flex items-center p-5";
+                todo_card.innerHTML = `
+                    <p id="card-${index}" class="w-[50%]">${content}</p>
+                    <div class="flex gap-4 w-[50%] justify-end">
+                        <i id="done-${index}" class="fi fi-ss-badge-check bg-indigo-500 p-2 rounded-[40%] cursor-pointer"></i>
+                        <i id="delete-${index}" class="fi fi-ss-trash-check bg-indigo-500 p-2 rounded-[40%] cursor-pointer"></i>
+                    </div>`;
+                todo_cards_Element.append(todo_card);
+            });
             localStorage.setItem("list", JSON.stringify(list));
         }
 
-        !localStorage.getItem("list") ? count = 0 : count = JSON.parse(localStorage.getItem("list")).length;
-        list = JSON.parse(localStorage.getItem("list")) || [];
-
-        if (localStorage.getItem("list")) {
-            console.log("i am here");
-            list.forEach(element => {
-                create_card(element, list.indexOf(element));
-            });
+        function add_card() {
+            const content = input_Element.value.trim();
+            if (content === "") return; 
+            list.push(content);
+            input_Element.value = "";
+            render_list();
         }
 
+        
+        render_list();
+
         add_Element.addEventListener("click", add_card);
-        input_Element.addEventListener("keypress", (event) => {
+        input_Element.addEventListener("keypress", (event) => { 
             if (event.key === "Enter") {
-                add_card();
+                add_card(); 
             }
         });
 
         todo_cards_Element.addEventListener('click', (event) => {
-            let action = event.target.id.split("-");
-            if (action[0] == "done") {
-                const card_Element = document.querySelector(`#card-${action[1]}`);
-                card_Element.classList.toggle("line-through")
+            const [type, index] = event.target.id.split("-");
+            if (!type) return;
+            if (type === "done") {
+                document.querySelector(`#card-${index}`).classList.toggle("line-through");
             }
-            if (action[0] == "delete") {
-                const card_Element = document.querySelector(`#card-${action[1]}`);
-                card_Element.parentElement.remove()
-                list.splice(action[1] - 1, 1);
-                console.log(list);
-                localStorage.setItem("list", JSON.stringify(list))
+            if (type === "delete") {
+                list.splice(index, 1);
+                render_list();
             }
-        })
+        });
     </script>
 
 </body>
